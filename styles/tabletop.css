@@ -1,0 +1,392 @@
+/* Tabletop System Styles */
+
+/* Global Styles */
+.tabletop {
+    --color-primary: #5e0000;
+    --color-secondary: #9a7d0a;
+    --color-tertiary: #4b5320;
+    --color-border: #999;
+    --color-shadow: rgba(0, 0, 0, 0.1);
+    --font-primary: "Roboto", sans-serif;
+    --font-secondary: "Abril Fatface", serif;
+  }
+
+  .tabletop .window-content {
+    background: url("../assets/background.webp");
+    padding: 5px;
+    font-family: var(--font-primary);
+  }
+
+  .tabletop .rollable:hover,
+  .tabletop .rollable:focus {
+    color: var(--color-secondary);
+    text-shadow: 0 0 10px var(--color-secondary);
+    cursor: pointer;
+  }
+
+  /* Sheet Header */
+  .tabletop .sheet-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+  }
+
+  .tabletop .sheet-header .profile-img {
+    flex: 0 0 100px;
+    height: 100px;
+    margin-right: 10px;
+    border: 2px solid var(--color-border);
+    border-radius: 5px;
+  }
+
+  .tabletop .sheet-header .header-fields {
+    flex: 1;
+  }
+
+  .tabletop .sheet-header h1.charname {
+    height: 50px;
+    padding: 0px;
+    margin: 5px 0;
+    border-bottom: 0;
+  }
+
+  .tabletop .sheet-header h1.charname input {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-family: var(--font-secondary);
+    color: var(--color-primary);
+    font-size: 2em;
+  }
+
+  /* Navigation Tabs */
+  .tabletop .sheet-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 5px 0 10px;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .tabletop .sheet-tabs .item {
+    flex: 1;
+    padding: 10px 0;
+    text-align: center;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    color: #444;
+  }
+
+  .tabletop .sheet-tabs .item.active {
+    text-decoration: underline;
+    text-shadow: none;
+    color: var(--color-primary);
+    border-bottom: 3px solid var(--color-primary);
+  }
+
+  .tabletop .sheet-tabs .item:hover {
+    text-shadow: 0 0 5px var(--color-shadow);
+    color: var(--color-secondary);
+  }
+
+  /* Grid Layouts */
+  .tabletop .grid {
+    display: grid;
+    gap: 10px;
+    margin: 10px 0;
+    padding: 0;
+  }
+
+  .tabletop .grid-2col {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tabletop .grid-3col {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .tabletop .grid-4col {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .tabletop .grid-5col {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .tabletop .grid-6col {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  /* Resources */
+  .tabletop .resources .resource {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 5px;
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    text-align: center;
+  }
+
+  .tabletop .resources .resource-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .tabletop .resources .resource-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tabletop .resources input {
+    max-width: 50px;
+    text-align: center;
+  }
+
+  /* Combat Stats */
+  .tabletop .combat-stats {
+    margin-top: 10px;
+  }
+
+  .tabletop .combat-stats .combat-stat {
+    background: rgba(94, 0, 0, 0.05);
+    padding: 5px;
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    text-align: center;
+  }
+
+  .tabletop .combat-stats .resource-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  /* Attributes and Saves */
+  .tabletop .attributes,
+  .tabletop .saves {
+    margin-top: 20px;
+  }
+
+  .tabletop .attribute,
+  .tabletop .save {
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    padding: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+  }
+
+  .tabletop .attribute .attribute-label,
+  .tabletop .save .save-label {
+    flex: 1;
+    font-weight: bold;
+    padding-left: 5px;
+  }
+
+  .tabletop .attribute .attribute-value {
+    flex: 0 0 40px;
+    text-align: center;
+  }
+
+  .tabletop .attribute .attribute-mod {
+    flex: 0 0 30px;
+    text-align: center;
+    background: var(--color-tertiary);
+    color: white;
+    border-radius: 3px;
+    padding: 2px;
+    margin-left: 5px;
+  }
+
+  .tabletop .save .save-value {
+    flex: 0 0 30px;
+    text-align: center;
+    background: var(--color-tertiary);
+    color: white;
+    border-radius: 3px;
+    padding: 2px;
+  }
+
+  /* Item Lists */
+  .tabletop .item-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 5px;
+  }
+
+  .tabletop .item-list .item-header {
+    padding: 5px;
+    font-weight: bold;
+    border-bottom: 1px solid var(--color-border);
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  .tabletop .item-list .item {
+    padding: 5px;
+    border-bottom: 1px solid var(--color-border);
+    align-items: center;
+  }
+
+  .tabletop .item-list .item:last-child {
+    border-bottom: none;
+  }
+
+  .tabletop .item-list .item-name {
+    flex: 2;
+    display: flex;
+    align-items: center;
+  }
+
+  .tabletop .item-list .item-image {
+    flex: 0 0 24px;
+    margin-right: 5px;
+  }
+
+  .tabletop .item-list h4 {
+    margin: 0;
+    font-weight: bold;
+  }
+
+  .tabletop .item-list .item-controls {
+    flex: 0 0 80px;
+    text-align: right;
+  }
+
+  .tabletop .item-list .item-controls a {
+    margin: 0 3px;
+  }
+
+  .tabletop .item-controls {
+    margin-top: 5px;
+    text-align: right;
+  }
+
+  /* Forms */
+  .tabletop .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+
+  .tabletop .form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .tabletop .form-fields {
+    display: flex;
+    align-items: center;
+  }
+
+  .tabletop .form-fields > * {
+    margin-right: 5px;
+  }
+
+  .tabletop .checkbox {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+
+  .tabletop .checkbox input {
+    margin-right: 5px;
+  }
+
+  .tabletop h3 {
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    color: var(--color-primary);
+  }
+
+  /* Tabs */
+  .tabletop .sheet-body .tab {
+    padding: 10px;
+    overflow-y: auto;
+  }
+
+  /* Flexbox Utilities */
+  .flexrow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .flexcol {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .flex-center {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flex-between {
+    justify-content: space-between;
+  }
+
+  .flex-group-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Chat Cards */
+  .tabletop.chat-card {
+    padding: 10px;
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+
+  .tabletop.chat-card .card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 5px;
+  }
+
+  .tabletop.chat-card .card-header img {
+    flex: 0 0 36px;
+    margin-right: 5px;
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+  }
+
+  .tabletop.chat-card .card-header h3 {
+    flex: 1;
+    margin: 0;
+    border: none;
+    padding: 0;
+  }
+
+  .tabletop.chat-card .card-content {
+    margin: 5px 0;
+  }
+
+  .tabletop.chat-card .card-buttons {
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .tabletop.chat-card button {
+    padding: 5px 10px;
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.05);
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .tabletop.chat-card button:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }

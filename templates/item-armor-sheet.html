@@ -1,0 +1,70 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+    <header class="sheet-header">
+      <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+      <div class="header-fields">
+        <h1 class="charname">
+          <input name="name" type="text" value="{{item.name}}" placeholder="Armor Name"/>
+        </h1>
+        <div class="item-subtitle">
+          <h4 class="item-type">{{item.type.toUpperCase}}</h4>
+          <select name="system.armorType">
+            {{#select system.armorType}}
+            {{#each config.armorTypes as |name type|}}
+            <option value="{{type}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+          </select>
+        </div>
+      </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+      <a class="item" data-tab="description">Description</a>
+      <a class="item" data-tab="details">Details</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+      {{!-- Description Tab --}}
+      <div class="tab" data-group="primary" data-tab="description">
+        {{editor descriptionHTML target="system.description" button=true editable=editable engine="prosemirror"}}
+      </div>
+
+      {{!-- Details Tab --}}
+      <div class="tab details" data-group="primary" data-tab="details">
+        <div class="grid grid-2col">
+          <div class="armor-properties">
+            <h3>Armor Properties</h3>
+            <div class="form-group">
+              <label>Equipped</label>
+              <input type="checkbox" name="system.equipped" {{checked system.equipped}}/>
+            </div>
+
+            <div class="form-group">
+              <label>Weight</label>
+              <input type="number" name="system.weight" value="{{system.weight}}"/>
+            </div>
+
+            <div class="form-group">
+              <label>Armor Class Bonus</label>
+              <input type="number" name="system.armorBonus" value="{{system.armorBonus}}"/>
+            </div>
+
+            <div class="form-group">
+              <label>Dexterity Modifier Limit</label>
+              <select name="system.dexLimit">
+                {{#select system.dexLimit}}
+                <option value="">No Limit</option>
+                <option value="0">+0 Max</option>
+                <option value="1">+1 Max</option>
+                <option value="2">+2 Max</option>
+                <option value="3">+3 Max</option>
+                {{/select}}
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </form>
