@@ -11,8 +11,14 @@
     --font-secondary: "Abril Fatface", serif;
   }
 
+/* Fix for transparency issues */
+.window-app .window-content {
+  background: rgba(240, 240, 240, 1) !important;
+}
+
   .tabletop .window-content {
-    background: url("../assets/background.webp");
+    background: #f0f0f0 url("../assets/background.webp");
+    background-color: rgba(240, 240, 240, 1); /* Solid background fallback */
     padding: 5px;
     font-family: var(--font-primary);
   }
@@ -31,6 +37,8 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     margin-bottom: 10px;
+    background-color: rgba(240, 240, 240, 1); /* Solid background for header */
+    padding: 5px;
   }
 
   .tabletop .sheet-header .profile-img {
@@ -307,6 +315,7 @@
   .tabletop .sheet-body .tab {
     padding: 10px;
     overflow-y: auto;
+    background-color: rgba(240, 240, 240, 1); /* Solid background for tab content */
   }
 
   /* Flexbox Utilities */
