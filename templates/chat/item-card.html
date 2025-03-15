@@ -1,0 +1,50 @@
+<div class="tabletop chat-card" data-actor-id="{{actor._id}}" data-item-id="{{item._id}}">
+    <header class="card-header">
+      <img src="{{item.img}}" title="{{item.name}}" width="36" height="36"/>
+      <h3>{{item.name}}</h3>
+    </header>
+
+    <div class="card-content">
+      {{{item.system.description}}}
+
+      {{#if item.system.damage}}
+      <div class="card-damage">
+        <strong>Damage:</strong> {{item.system.damage.formula}} {{item.system.damage.type}}
+      </div>
+      {{/if}}
+
+      {{#if item.system.range}}
+      <div class="card-range">
+        <strong>Range:</strong> {{item.system.range.value}} {{#if item.system.range.max}}/ {{item.system.range.max}}{{/if}} {{item.system.range.units}}
+      </div>
+      {{/if}}
+
+      {{#if item.system.wpCost}}
+      <div class="card-cost">
+        <strong>WP Cost:</strong> {{item.system.wpCost}}
+      </div>
+      {{/if}}
+
+      {{#if item.system.save}}
+      <div class="card-save">
+        <strong>Save:</strong> DC {{item.system.save.dc}} {{item.system.save.attribute}}
+      </div>
+      {{/if}}
+    </div>
+
+    <div class="card-buttons">
+      {{#if (eq item.type "weapon")}}
+      <button data-action="weaponAttack">Attack</button>
+      <button data-action="weaponDamage">Damage</button>
+      {{/if}}
+
+      {{#if (eq item.type "spell")}}
+      <button data-action="spellCast">Cast Spell</button>
+      <button data-action="spellDamage">Spell Damage</button>
+      {{/if}}
+
+      {{#if (eq item.type "ability")}}
+      <button data-action="useAbility">Use Ability</button>
+      {{/if}}
+    </div>
+  </div>

@@ -1,0 +1,45 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+    <header class="sheet-header">
+      <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+      <div class="header-fields">
+        <h1 class="charname">
+          <input name="name" type="text" value="{{item.name}}" placeholder="Item Name"/>
+        </h1>
+        <div class="item-subtitle">
+          <h4 class="item-type">GEAR</h4>
+        </div>
+      </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+      <a class="item" data-tab="description">Description</a>
+      <a class="item" data-tab="details">Details</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+      {{!-- Description Tab --}}
+      <div class="tab" data-group="primary" data-tab="description">
+        {{editor descriptionHTML target="system.description" button=true editable=editable engine="prosemirror"}}
+      </div>
+
+      {{!-- Details Tab --}}
+      <div class="tab details" data-group="primary" data-tab="details">
+        <div class="grid grid-2col">
+          <div class="gear-properties">
+            <h3>Item Properties</h3>
+            <div class="form-group">
+              <label>Quantity</label>
+              <input type="number" name="system.quantity" value="{{system.quantity}}" min="1"/>
+            </div>
+
+            <div class="form-group">
+              <label>Weight (per unit)</label>
+              <input type="number" name="system.weight" value="{{system.weight}}" step="0.1"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </form>

@@ -1,0 +1,109 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+    <header class="sheet-header">
+      <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+      <div class="header-fields">
+        <h1 class="charname">
+          <input name="name" type="text" value="{{item.name}}" placeholder="Weapon Name"/>
+        </h1>
+        <div class="item-subtitle">
+          <h4 class="item-type">{{item.type.toUpperCase}}</h4>
+          <select name="system.weaponType">
+            {{#select system.weaponType}}
+            {{#each config.weaponTypes as |name type|}}
+            <option value="{{type}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+          </select>
+        </div>
+      </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+      <a class="item" data-tab="description">Description</a>
+      <a class="item" data-tab="details">Details</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+      {{!-- Description Tab --}}
+      <div class="tab" data-group="primary" data-tab="description">
+        {{editor descriptionHTML target="system.description" button=true editable=editable engine="prosemirror"}}
+      </div>
+
+      {{!-- Details Tab --}}
+      <div class="tab details" data-group="primary" data-tab="details">
+        <div class="grid grid-2col">
+          <div class="weapon-properties">
+            <h3>Weapon Properties</h3>
+            <div class="form-group">
+              <label>Equipped</label>
+              <input type="checkbox" name="system.equipped" {{checked system.equipped}}/>
+            </div>
+
+            <div class="form-group">
+              <label>Weight</label>
+              <input type="number" name="system.weight" value="{{system.weight}}"/>
+            </div>
+
+            <div class="form-group">
+              <label>Range (feet)</label>
+              <div class="form-fields">
+                <input type="number" name="system.range.value" value="{{system.range.value}}"/>
+                <span>/</span>
+                <input type="number" name="system.range.max" value="{{system.range.max}}"/>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Properties</label>
+              <div class="form-fields weapon-props">
+                {{#each config.weaponProperties as |name prop|}}
+                <label class="checkbox">
+                  <input type="checkbox" name="system.weaponProperties.{{prop}}" {{checked (lookup ../system.weaponProperties prop)}}/>
+                  {{name}}
+                </label>
+                {{/each}}
+              </div>
+            </div>
+          </div>
+
+          <div class="weapon-damage">
+            <h3>Damage & Attack</h3>
+            <div class="form-group">
+              <label>Damage Formula</label>
+              <input type="text" name="system.damage.formula" value="{{system.damage.formula}}"/>
+            </div>
+
+            <div class="form-group">
+              <label>Damage Type</label>
+              <select name="system.damage.type">
+                {{#select system.damage.type}}
+                {{#each config.damageTypes as |name type|}}
+                <option value="{{type}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Attack Attribute</label>
+              <select name="system.attackBonus.attribute">
+                {{#select system.attackBonus.attribute}}
+                <option value="str">Strength</option>
+                <option value="dex">Dexterity</option>
+                {{/select}}
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Attack Bonus</label>
+              <div class="form-fields">
+                <input type="text" name="system.attackBonus.value" value="{{system.attackBonus.value}}" placeholder="0"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </form>

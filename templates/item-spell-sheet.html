@@ -1,0 +1,138 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+    <header class="sheet-header">
+      <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+      <div class="header-fields">
+        <h1 class="charname">
+          <input name="name" type="text" value="{{item.name}}" placeholder="Spell Name"/>
+        </h1>
+        <div class="item-subtitle">
+          <h4 class="item-type">{{item.type.toUpperCase}}</h4>
+          <select name="system.school">
+            {{#select system.school}}
+            {{#each config.magicSchools as |name school|}}
+            <option value="{{school}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+          </select>
+        </div>
+      </div>
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+      <a class="item" data-tab="description">Description</a>
+      <a class="item" data-tab="details">Details</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+      {{!-- Description Tab --}}
+      <div class="tab" data-group="primary" data-tab="description">
+        {{editor descriptionHTML target="system.description" button=true editable=editable engine="prosemirror"}}
+      </div>
+
+      {{!-- Details Tab --}}
+      <div class="tab details" data-group="primary" data-tab="details">
+        <div class="grid grid-2col">
+          <div class="spell-properties">
+            <h3>Spell Properties</h3>
+            <div class="form-group">
+              <label>Level</label>
+              <input type="number" name="system.level" value="{{system.level}}" min="1" max="9"/>
+            </div>
+
+            <div class="form-group">
+              <label>Casting Time</label>
+              <input type="text" name="system.castingTime" value="{{system.castingTime}}"/>
+            </div>
+
+            <div class="form-group">
+              <label>Range</label>
+              <div class="form-fields">
+                <input type="number" name="system.range.value" value="{{system.range.value}}"/>
+                <select name="system.range.units">
+                  {{#select system.range.units}}
+                  <option value="ft">feet</option>
+                  <option value="mi">miles</option>
+                  <option value="self">self</option>
+                  <option value="touch">touch</option>
+                  {{/select}}
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Duration</label>
+              <input type="text" name="system.duration" value="{{system.duration}}"/>
+            </div>
+
+            <div class="form-group">
+              <label>Components</label>
+              <div class="form-fields">
+                <label class="checkbox">
+                  <input type="checkbox" name="system.components.verbal" {{checked system.components.verbal}}/>
+                  Verbal
+                </label>
+                <label class="checkbox">
+                  <input type="checkbox" name="system.components.somatic" {{checked system.components.somatic}}/>
+                  Somatic
+                </label>
+                <label class="checkbox">
+                  <input type="checkbox" name="system.components.material" {{checked system.components.material}}/>
+                  Material
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Material Components</label>
+              <input type="text" name="system.components.materialDescription" value="{{system.components.materialDescription}}"/>
+            </div>
+          </div>
+
+          <div class="spell-effects">
+            <h3>Spell Effects</h3>
+            <div class="form-group">
+              <label>Willpower Cost</label>
+              <input type="number" name="system.wpCost" value="{{system.wpCost}}" min="1"/>
+            </div>
+
+            <div class="form-group">
+              <label>Damage Formula</label>
+              <input type="text" name="system.damage.formula" value="{{system.damage.formula}}"/>
+            </div>
+
+            <div class="form-group">
+              <label>Damage Type</label>
+              <select name="system.damage.type">
+                {{#select system.damage.type}}
+                {{#each config.damageTypes as |name type|}}
+                <option value="{{type}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Saving Throw</label>
+              <div class="form-fields">
+                <select name="system.save.attribute">
+                  {{#select system.save.attribute}}
+                  <option value="str">Strength</option>
+                  <option value="dex">Dexterity</option>
+                  <option value="con">Constitution</option>
+                  <option value="int">Intelligence</option>
+                  <option value="wis">Wisdom</option>
+                  <option value="cha">Charisma</option>
+                  <option value="none">None</option>
+                  {{/select}}
+                </select>
+                <span>DC</span>
+                <input type="number" name="system.save.dc" value="{{system.save.dc}}"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </form>
