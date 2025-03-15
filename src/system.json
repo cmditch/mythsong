@@ -9,8 +9,8 @@
     },
     "authors": [
         {
-            "name": "Your Name",
-            "url": "https://github.com/yourname"
+            "name": "Nate's Friend",
+            "url": "https://github.com/cmditch"
         }
     ],
     "esmodules": [
@@ -32,7 +32,7 @@
     "gridUnits": "ft",
     "primaryTokenAttribute": "resources.hp",
     "secondaryTokenAttribute": "resources.wp",
-    "url": "https://github.com/yourname/tabletop",
-    "manifest": "https://raw.githubusercontent.com/yourname/tabletop/main/system.json",
-    "download": "https://github.com/yourname/tabletop/archive/v1.0.0.zip"
+    "url": "https://github.com/cmditch/mythsong",
+    "manifest": "https://raw.githubusercontent.com/cmditch/mythsong/src/system.json",
+    "download": "https://github.com/cmditch/mythsong/releases/v1.zip"
 }
