@@ -7,13 +7,25 @@
         </h1>
         <div class="item-subtitle">
           <h4 class="item-type">{{item.type.toUpperCase}}</h4>
-          <select name="system.weaponType">
+          <select name="system.weaponType" id="weapon-type-select">
             {{#select system.weaponType}}
             {{#each config.weaponTypes as |name type|}}
             <option value="{{type}}">{{name}}</option>
             {{/each}}
             {{/select}}
           </select>
+          <div class="weapon-subtype">
+            <label>Weapon Subtype</label>
+            <select name="system.weaponSubtype" id="weapon-subtype-select">
+              {{#select system.weaponSubtype}}
+              {{#if system.weaponType}}
+                {{#each (lookup ../config.weaponSubtypes system.weaponType) as |name type|}}
+                <option value="{{type}}">{{name}}</option>
+                {{/each}}
+              {{/if}}
+              {{/select}}
+            </select>
+          </div>
         </div>
       </div>
     </header>
@@ -100,6 +112,95 @@
               <label>Attack Bonus</label>
               <div class="form-fields">
                 <input type="text" name="system.attackBonus.value" value="{{system.attackBonus.value}}" placeholder="0"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="materials-section">
+          <h3>Materials</h3>
+          <div class="grid grid-3col">
+            <div class="form-group">
+              <label>Primary Material</label>
+              <div class="form-fields">
+                <select name="system.materials.primary.category" class="material-category" data-target="primary">
+                  {{#select system.materials.primary.category}}
+                  <option value="">None</option>
+                  <option value="metals">Metals</option>
+                  <option value="woods">Woods</option>
+                  <option value="stones">Stones</option>
+                  <option value="animal">Animal Materials</option>
+                  <option value="fabrics">Fabrics</option>
+                  <option value="essences">Magical Essences</option>
+                  <option value="gems">Gems</option>
+                  {{/select}}
+                </select>
+                <select name="system.materials.primary.type" class="material-type" id="primary-material-type">
+                  {{#select system.materials.primary.type}}
+                  <option value="">Select Type</option>
+                  {{#if system.materials.primary.category}}
+                    {{#each (lookup ../config.materials system.materials.primary.category) as |name type|}}
+                    <option value="{{type}}">{{name}}</option>
+                    {{/each}}
+                  {{/if}}
+                  {{/select}}
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Secondary Material</label>
+              <div class="form-fields">
+                <select name="system.materials.secondary.category" class="material-category" data-target="secondary">
+                  {{#select system.materials.secondary.category}}
+                  <option value="">None</option>
+                  <option value="metals">Metals</option>
+                  <option value="woods">Woods</option>
+                  <option value="stones">Stones</option>
+                  <option value="animal">Animal Materials</option>
+                  <option value="fabrics">Fabrics</option>
+                  <option value="essences">Magical Essences</option>
+                  <option value="gems">Gems</option>
+                  {{/select}}
+                </select>
+                <select name="system.materials.secondary.type" class="material-type" id="secondary-material-type">
+                  {{#select system.materials.secondary.type}}
+                  <option value="">Select Type</option>
+                  {{#if system.materials.secondary.category}}
+                    {{#each (lookup ../config.materials system.materials.secondary.category) as |name type|}}
+                    <option value="{{type}}">{{name}}</option>
+                    {{/each}}
+                  {{/if}}
+                  {{/select}}
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Decoration</label>
+              <div class="form-fields">
+                <select name="system.materials.decoration.category" class="material-category" data-target="decoration">
+                  {{#select system.materials.decoration.category}}
+                  <option value="">None</option>
+                  <option value="metals">Metals</option>
+                  <option value="woods">Woods</option>
+                  <option value="stones">Stones</option>
+                  <option value="animal">Animal Materials</option>
+                  <option value="fabrics">Fabrics</option>
+                  <option value="essences">Magical Essences</option>
+                  <option value="gems">Gems</option>
+                  {{/select}}
+                </select>
+                <select name="system.materials.decoration.type" class="material-type" id="decoration-material-type">
+                  {{#select system.materials.decoration.type}}
+                  <option value="">Select Type</option>
+                  {{#if system.materials.decoration.category}}
+                    {{#each (lookup ../config.materials system.materials.decoration.category) as |name type|}}
+                    <option value="{{type}}">{{name}}</option>
+                    {{/each}}
+                  {{/if}}
+                  {{/select}}
+                </select>
               </div>
             </div>
           </div>

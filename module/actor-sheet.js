@@ -1,4 +1,3 @@
-
 /**
  * Extend the basic ActorSheet for our custom tabletop system
  * @extends {ActorSheet}
@@ -30,6 +29,9 @@ export class TabletopActorSheet extends ActorSheet {
         // Add roll data for TinyMCE editors
         context.rollData = context.actor.getRollData();
         context.system = actorData.system;
+
+        // Add CONFIG to context for use in templates
+        context.config = CONFIG.TABLETOP;
 
         return context;
     }
@@ -119,16 +121,18 @@ export class TabletopActorSheet extends ActorSheet {
         // Add Inventory Item
         html.find('.item-create').click(this._onItemCreate.bind(this));
 
-        // Item controls (edit/delete)
+        // Update Inventory Item
         html.find('.item-edit').click(ev => {
             const li = $(ev.currentTarget).parents(".item");
             const item = this.actor.items.get(li.data("itemId"));
             item.sheet.render(true);
         });
 
+        // Delete Inventory Item
         html.find('.item-delete').click(ev => {
             const li = $(ev.currentTarget).parents(".item");
-            this.actor.deleteEmbeddedDocuments("Item", [li.data("itemId")]);
+            const itemId = li.data("itemId");
+            this.actor.deleteEmbeddedDocuments("Item", [itemId]);
             li.slideUp(200, () => this.render(false));
         });
 
@@ -139,7 +143,25 @@ export class TabletopActorSheet extends ActorSheet {
             item.update({ "system.equipped": !item.system.equipped });
         });
 
-        // Roll handlers
+        // Add Ancestry Trait
+        html.find('.trait-add').click(event => {
+            event.preventDefault();
+            const traits = this.actor.system.ancestry.traits || [];
+            traits.push("");
+            this.actor.update({ "system.ancestry.traits": traits });
+        });
+
+        // Delete Ancestry Trait
+        html.find('.trait-delete').click(event => {
+            event.preventDefault();
+            const element = event.currentTarget;
+            const index = Number(element.dataset.index);
+            const traits = duplicate(this.actor.system.ancestry.traits || []);
+            traits.splice(index, 1);
+            this.actor.update({ "system.ancestry.traits": traits });
+        });
+
+        // Rollable abilities
         html.find('.rollable').click(this._onRoll.bind(this));
 
         // Drag events for macros

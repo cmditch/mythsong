@@ -1,4 +1,3 @@
-
 /**
  * Extend the basic ItemSheet for our tabletop system
  * @extends {ItemSheet}
@@ -77,6 +76,9 @@ export class TabletopItemSheet extends ItemSheet {
         context.armorTypes = armorTypes;
         context.magicSchools = magicSchools;
 
+        // Add CONFIG to context for use in templates
+        context.config = CONFIG.TABLETOP;
+
         // Specific properties for weapons
         if (item.type === 'weapon') {
             context.isRanged = (context.system.range.max > 5);
@@ -112,6 +114,71 @@ export class TabletopItemSheet extends ItemSheet {
 
         // Everything below here is only needed if the sheet is editable
         if (!this.options.editable) return;
+
+        // Add listeners here
+        html.find('#weapon-type-select').change(this._onWeaponTypeChange.bind(this));
+        html.find('.material-category').change(this._onMaterialCategoryChange.bind(this));
+    }
+
+    /**
+     * Handle changes to the weapon type dropdown
+     * @param {Event} event The triggering event
+     * @private
+     */
+    _onWeaponTypeChange(event) {
+        event.preventDefault();
+        const weaponType = event.currentTarget.value;
+        const subtypeSelect = document.getElementById('weapon-subtype-select');
+
+        // Clear existing options
+        while (subtypeSelect.firstChild) {
+            subtypeSelect.removeChild(subtypeSelect.firstChild);
+        }
+
+        // Add new options based on selected weapon type
+        if (weaponType && CONFIG.TABLETOP.weaponSubtypes[weaponType]) {
+            const subtypes = CONFIG.TABLETOP.weaponSubtypes[weaponType];
+            for (let [key, name] of Object.entries(subtypes)) {
+                const option = document.createElement('option');
+                option.value = key;
+                option.text = name;
+                subtypeSelect.appendChild(option);
+            }
+        }
+    }
+
+    /**
+     * Handle changes to the material category dropdown
+     * @param {Event} event The triggering event
+     * @private
+     */
+    _onMaterialCategoryChange(event) {
+        event.preventDefault();
+        const category = event.currentTarget.value;
+        const target = event.currentTarget.dataset.target;
+        const typeSelect = document.getElementById(`${target}-material-type`);
+
+        // Clear existing options
+        while (typeSelect.firstChild) {
+            typeSelect.removeChild(typeSelect.firstChild);
+        }
+
+        // Add default option
+        const defaultOption = document.createElement('option');
+        defaultOption.value = "";
+        defaultOption.text = "Select Type";
+        typeSelect.appendChild(defaultOption);
+
+        // Add new options based on selected category
+        if (category && CONFIG.TABLETOP.materials[category]) {
+            const types = CONFIG.TABLETOP.materials[category];
+            for (let [key, name] of Object.entries(types)) {
+                const option = document.createElement('option');
+                option.value = key;
+                option.text = name;
+                typeSelect.appendChild(option);
+            }
+        }
     }
 
     /** @override */

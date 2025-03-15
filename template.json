@@ -9,6 +9,19 @@
         ],
         "character": {
             "biography": "",
+            "ancestry": {
+                "value": "",
+                "traits": []
+            },
+            "class": {
+                "primary": "",
+                "secondary": "",
+                "level": {
+                    "value": 1,
+                    "min": 1,
+                    "max": 20
+                }
+            },
             "attributes": {
                 "str": {
                     "value": 10,
@@ -160,7 +173,22 @@
             "weight": 0,
             "equipped": false,
             "weaponType": "",
+            "weaponSubtype": "",
             "weaponProperties": [],
+            "materials": {
+                "primary": {
+                    "category": "",
+                    "type": ""
+                },
+                "secondary": {
+                    "category": "",
+                    "type": ""
+                },
+                "decoration": {
+                    "category": "",
+                    "type": ""
+                }
+            },
             "damage": {
                 "formula": "1d6",
                 "type": "slashing"
